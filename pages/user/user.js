@@ -18,8 +18,22 @@ export default (userId) => {
             Authorization: "Bearer " + userJWTToken.accessToken,
           },
         })
+          .then((response) => response.json())
+          // Yes we can do like this. The data from the api is the argument to renderOrders!
+          .then(renderOrders);
       });
   } else {
     alert("Please login to access this site");
   }
 };
+
+function renderOrders(orders) {
+  let ulHtml = "";
+  orders.forEach((order) => {
+    ulHtml += `<li>
+      <div>Id: ${order.customerId}</div>
+      <div>Comments: ${order.comments}</div>
+    </li>`;
+  });
+  document.querySelector("ul.orders").innerHTML = ulHtml;
+}
