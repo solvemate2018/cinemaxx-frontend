@@ -16,14 +16,14 @@ function handleLoginFunctionality() {
     // Make sure the form is not submitted
     event.preventDefault();
 
-    fetch(`${window.apiUrl}/api/auth/signin`, {
+    fetch(`${window.apiUrl}api/auth/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: document.querySelector("input.username").value,
-        password: document.querySelector("input.password").value,
+        username: document.querySelector('#form1Example13').value,
+        password: document.querySelector('#form1Example23').value,
       }),
     })
       .then((response) => response.json())
