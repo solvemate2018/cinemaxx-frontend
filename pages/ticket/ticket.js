@@ -5,21 +5,43 @@ let rows = 0;
 let columns = 0;
 const table = document.querySelector("table");
 const submitBtn = document.querySelector(".submit-btn");
-renderSeats();
+const h2ProjectionInfo = document.querySelector("h2");
+
+renderSeatsAndInfo();
 
 submitBtn.addEventListener("click", () => {
   selectedSeats = readTable();
   sendRequestToBook(projectionId, selectedSeats);
 });
 
-function renderSeats() {
+function getProjectionInfo(responseObject) {
+  //returns object with projction info
+  const firstTicket = responseObject[0];
+  const cinemaHallName = firstTicket.projection.cinemaHallName;
+  const movieName = firstTicket.projection.movie.name;
+  const projectionInfo = {
+    movie: movieName,
+    cinemaHall: cinemaHallName,
+  };
+  return projectionInfo;
+}
+function renderProjectionInfo(responseObject) {
+  const projectionInfo = getProjectionInfo(responseObject);
+  const movieName = projectionInfo.movie;
+  const cinemaHallName = projectionInfo.cinemaHall;
+  h2ProjectionInfo.innerHTML =
+    "Cinema hall: " + cinemaHallName + "<br> Movie name: " + movieName;
+}
+
+function renderSeatsAndInfo() {
+  //fetch seat and projection info from api and render data
   fetch(apiUrl)
     .then((response) => response.json())
     .then((tickets) => {
       rows = getNumberOfRows(tickets);
       columns = getNumberOfColumns(tickets);
-      clearTable();
       populateTable(tickets);
+      renderProjectionInfo(tickets);
     });
 }
 
