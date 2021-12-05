@@ -1,9 +1,8 @@
-const API_PROJECTIONS_LINK = "http://localhost/api/projection/theater/";
 let API_PROJECTIONS_WITH_THEATER_LINK = "";
 
 export default (theaterID) => {
   const content = document.querySelector(".content");
-  API_PROJECTIONS_WITH_THEATER_LINK = API_PROJECTIONS_LINK + theaterID;
+  API_PROJECTIONS_WITH_THEATER_LINK = `${window.apiUrl}api/projection/theater/`+theaterID
 
   return fetch("./pages/projections/projections.html")
     .then((response) => response.text())
