@@ -17,7 +17,9 @@ export default () => {
       event.preventDefault();
 
       if(document.querySelector('#Password').value === document.querySelector('#RepeatedPassword').value){
-
+        console.log(document.querySelector('#Email').value);
+        console.log(document.querySelector('#Username').value);
+        console.log(document.querySelector('#Password').value);
       fetch(`${window.apiUrl}api/auth/signup`, {
         method: "POST",
         headers: {
@@ -36,9 +38,12 @@ export default () => {
             // Saving the JWT to local storage
             localStorage.setItem("user", JSON.stringify(data));
             // navigating to the users route. Using the global window.router
-            window.router.navigate(`/user/${data.id}`);
-            window.alert(data.message);
+            window.router.navigate("/");
           }
+          else{
+            console.log(data);
+          }
+          window.alert(data.message);
         });
 
       }
