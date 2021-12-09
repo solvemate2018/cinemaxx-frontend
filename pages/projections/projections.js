@@ -1,3 +1,4 @@
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
 let API_PROJECTIONS_WITH_THEATER_LINK = "";
 
 export default (theaterID) => {
@@ -9,6 +10,7 @@ export default (theaterID) => {
     .then((mainHtml) => {
       content.innerHTML = mainHtml;
       handleProjectionFunctionality();
+      renderNavBar();
     });
 };
 

@@ -1,3 +1,5 @@
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
 console.log("loaded");
 const projectionId = 2; //needs to be changed so it grabs id from previous page
 const apiUrl = "http://54.227.55.197/api/ticket/projection/" + projectionId;
@@ -7,6 +9,8 @@ const table = document.querySelector("table");
 const submitBtn = document.querySelector(".submit-btn");
 const h2ProjectionInfo = document.querySelector("h2");
 
+renderNavBar();
+renderFooter();
 renderSeatsAndInfo();
 
 submitBtn.addEventListener("click", () => {

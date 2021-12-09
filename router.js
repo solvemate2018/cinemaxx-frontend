@@ -3,6 +3,8 @@ import renderAbout from "./pages/about/about.js";
 import renderLogin from "./pages/login/login.js";
 import renderSignUp from "./pages/signUp/signUp.js";
 import renderProjections from "./pages/projections/projections.js"
+import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "./pages/shared/footer/footer.js";
 
 export default function () {
   window.router = new Navigo("/", { hash: true });
@@ -20,7 +22,7 @@ export default function () {
       login: () => {
         renderLogin();
       },
-      signUp: () => {
+      signup: () => {
         renderSignUp();
       },
        "theater/:theaterID/projections": ({data}) =>{

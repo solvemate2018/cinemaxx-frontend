@@ -1,3 +1,4 @@
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
 const api_movies_details = "http://54.227.55.197/api/movie/details/2"
 //const Movieurl = api_movies_details + MovieId;
 showmovie (api_movies_details);
@@ -58,7 +59,7 @@ fetch(url)
      el.appendChild(actorList);}
 
      mainContainer.appendChild(el);
-
+      renderNavBar();
     })
     .catch((error) => {
         console.log(error);

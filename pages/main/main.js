@@ -1,3 +1,5 @@
+import renderFooter from "/pages/shared/footer/footer.js";
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
 export default () => {
   const content = document.querySelector(".content");
 
@@ -6,13 +8,15 @@ export default () => {
     .then((mainHtml) => {
       content.innerHTML = mainHtml;
       generateDynamicContent();
+      renderNavBar();
+      renderFooter();
     });
 };
+
 
 async function generateDynamicContent(){
   const theaters = await fetchTheaters();
   generateLinks(theaters);
-  checkIfUserIsLogged();
 }
 
 function fetchTheaters(){
@@ -36,25 +40,8 @@ let li = document.createElement("li");
 li.classList.add("list-group-item");
 let link = document.createElement("a");
 link.innerText = theater.name;
-link.href = "./theater/" + theater.id +"/projections";
+link.href = "/#/theater/" + theater.id +"/projections";
 listOfLinks.appendChild(li);
 li.appendChild(link);
 });
-}
-
-function checkIfUserIsLogged(){
-  if(localStorage.getItem("user") != null){
-    document.querySelector(".nav-item").remove();
-    document.querySelector(".nav-item").remove();
-
-    const navbar = document.querySelector(".navbar-nav");
-    const logoutNav = document.createElement("li");
-    logoutNav.classList.add("nav-item");
-    const logoutLink = document.createElement("a");
-    logoutLink.classList.add("nav-link");
-    logoutLink.classList.add("text-dark");
-    logoutLink.innerText = "Logout";
-    navbar.appendChild(logoutNav);
-    navbar.appendChild(logoutLink);
-  }
 }
