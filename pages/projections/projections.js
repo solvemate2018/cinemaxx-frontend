@@ -121,13 +121,14 @@ function groupBy(arr, movie) {
 
 function generateTables(tablesContainer, projections) {
   //Function for generating all the tables containing all movies and their projections.
-  const tHeaderDescription =["Movie title","Genre","Age Limit","Movie Details"];
-  const tBodyDescription =["Start Time","Duration","Hall","Ticket Price","Book Movie"];
+  const tHeaderDescription =["Movie title","Genre","Duration","Age Limit","Movie Details"];
+  const tBodyDescription =["Start Time","Hall","Ticket Price","Book Movie"];
 
   for (let key in projections) {
     const movieCon = projections[key];
-    const ageLimit = movieCon[0].movie.category.name+" - "+ movieCon[0].movie.category.ageLimit
-    const movieData =[movieCon[0].movie.name, movieCon[0].movie.genre.name, ageLimit]
+    let movie = movieCon[0].movie;
+    const ageLimit = movie.category.name+" - "+ movie.category.ageLimit
+    const movieData =[movie.name, movie.genre.name,movie.durationInMinutes +" min.",, ageLimit]
     const tableMovies = document.createElement("table");
     const tableProjections = document.createElement("table");
     tableMovies.setAttribute("class","movie-table");
@@ -139,7 +140,7 @@ function generateTables(tablesContainer, projections) {
 
     tHeaderDescription.forEach((text)=>generateCellsInRow(movieDescriptionRow,text));
     movieData.forEach((text)=>generateCellsInRow(movieInfoRow,text))
-    const movieId = movieCon[0].movie.id;
+    const movieId = movie.id;
     generateMovieDetailButton(movieInfoRow, movieId);
     tBodyDescription.forEach((text)=>generateCellsInRow(projectionDescriptionRow,text))
     movieCon.forEach((projection)=>{
@@ -149,7 +150,6 @@ function generateTables(tablesContainer, projections) {
       const startTime = startTimeDate.join("-")+"  "+startTimeHour.join(":")
       let data = [
         startTime,
-        projection.movie.durationInMinutes +" min.",
         projection.cinemaHallName,
         projection.ticketPrice +"$",
       ];
