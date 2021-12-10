@@ -18,6 +18,7 @@ submitBtn.addEventListener("click", () => {
   sendRequestToBook(projectionId, selectedSeats);
 });
 
+
 function getProjectionInfo(responseObject) {
   //returns object with projction info
   const firstTicket = responseObject[0];

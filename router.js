@@ -25,7 +25,7 @@ export default function () {
       signup: () => {
         renderSignUp();
       },
-       "theater/:theaterID/projections": ({data}) =>{
+      "theater/:theaterID/projections": ({data}) =>{
         renderProjections(data.theaterID)
       }
     })
