@@ -187,7 +187,7 @@ function generateMovieDetailButton(row, movieId){
   let movieDetailsButton = document.createElement("a");
 
   movieDetailsButton.classList.add('btn','btn-primary');
-  movieDetailsButton.href="/#/"+movieId;
+  movieDetailsButton.href="/#/details/"+movieId;
   movieDetailsButton.setAttribute("role","button");
   movieDetailsButton.innerHTML="movie details";
   

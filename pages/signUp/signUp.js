@@ -43,7 +43,7 @@ export default () => {
             // Saving the JWT to local storage
             localStorage.setItem("user", JSON.stringify(data));
             // navigating to the users route. Using the global window.router
-            window.router.navigate("./");
+            window.router.navigate("/");
           }
           else{
             console.log(data);
