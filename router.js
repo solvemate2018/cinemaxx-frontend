@@ -23,9 +23,15 @@ export default function () {
       signUp: () => {
         renderSignUp();
       },
+<<<<<<< Updated upstream
       "/user/:id/": ({ data, params }) => {
         renderUser(data.id);
       },
+=======
+      "theater/:theaterID/projections": ({ data }) => {
+        renderProjections(data.theaterID)
+      }
+>>>>>>> Stashed changes
     })
     .resolve();
 }
