@@ -29,6 +29,7 @@ export default (projectionId) => {
 let rows = 0;
 let columns = 0;
 
+
 function getProjectionInfo(responseObject) {
   //returns object with projction info
   const firstTicket = responseObject[0];

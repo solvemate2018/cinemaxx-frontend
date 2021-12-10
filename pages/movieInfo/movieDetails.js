@@ -1,4 +1,5 @@
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
 const api_movies_details = "http://54.227.55.197/api/movie/details/2"
 //const Movieurl = api_movies_details + MovieId;
 showmovie (api_movies_details);
@@ -60,6 +61,7 @@ fetch(url)
 
      mainContainer.appendChild(el);
       renderNavBar();
+      renderFooter();
     })
     .catch((error) => {
         console.log(error);

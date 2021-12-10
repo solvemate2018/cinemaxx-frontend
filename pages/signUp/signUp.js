@@ -1,4 +1,5 @@
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
 export default () => {
     const content = document.querySelector(".content");
   
@@ -9,6 +10,7 @@ export default () => {
   
         handleLoginFunctionality();
         renderNavBar();
+        renderFooter();
       });
   };
   

@@ -1,4 +1,5 @@
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
 let API_PROJECTIONS_WITH_THEATER_LINK = "";
 
 export default (theaterID) => {
@@ -11,6 +12,7 @@ export default (theaterID) => {
       content.innerHTML = mainHtml;
       handleProjectionFunctionality();
       renderNavBar();
+      renderFooter();
     });
 };
 
