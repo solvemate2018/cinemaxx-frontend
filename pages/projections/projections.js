@@ -126,7 +126,6 @@ function generateTables(tablesContainer, projections) {
 
   for (let key in projections) {
     const movieCon = projections[key];
-    console.log(movieCon)
     const ageLimit = movieCon[0].movie.category.name+" - "+ movieCon[0].movie.category.ageLimit
     const movieData =[movieCon[0].movie.name, movieCon[0].movie.genre.name, ageLimit]
     const tableMovies = document.createElement("table");
@@ -140,6 +139,8 @@ function generateTables(tablesContainer, projections) {
 
     tHeaderDescription.forEach((text)=>generateCellsInRow(movieDescriptionRow,text));
     movieData.forEach((text)=>generateCellsInRow(movieInfoRow,text))
+    const movieId = movieCon[0].movie.id;
+    generateMovieDetailButton(movieInfoRow, movieId);
     tBodyDescription.forEach((text)=>generateCellsInRow(projectionDescriptionRow,text))
     movieCon.forEach((projection)=>{
       const startTimeArray = projection.startTime;
@@ -154,6 +155,7 @@ function generateTables(tablesContainer, projections) {
       ];
       let row = tableProjections.insertRow();
       data.forEach((info) => generateCellsInRow(row, info));
+      generateBookTicketButton(row,projection.id);
     });
     tablesContainer.appendChild(tableMovies);
     tablesContainer.appendChild(tableProjections)
@@ -161,7 +163,33 @@ function generateTables(tablesContainer, projections) {
 }
 
 function generateCellsInRow(row, info) {
+  //Function for generating cell in a row with given data.
   let cell = row.insertCell();
       let text = document.createTextNode(info);
       cell.appendChild(text);
+}
+
+function generateBookTicketButton(row, projectionID){
+  //Function for generating cell with button for navigating to book ticket page.
+  let bookTicketCell = row.insertCell();
+  let bookTicketButton = document.createElement("a");
+  bookTicketButton.classList.add('btn','btn-primary');
+  bookTicketButton.href="/#/ticket/"+projectionID;
+  bookTicketButton.setAttribute("role","button");
+  bookTicketButton.innerHTML="book ticket";
+  
+  bookTicketCell.appendChild(bookTicketButton);
+}
+
+function generateMovieDetailButton(row, movieId){
+  //Function for generating cell with button for navigating to movie details page.
+  let movieDetailsCell = row.insertCell();
+  let movieDetailsButton = document.createElement("a");
+
+  movieDetailsButton.classList.add('btn','btn-primary');
+  movieDetailsButton.href="/#/"+movieId;
+  movieDetailsButton.setAttribute("role","button");
+  movieDetailsButton.innerHTML="movie details";
+  
+  movieDetailsCell.appendChild(movieDetailsButton);
 }
