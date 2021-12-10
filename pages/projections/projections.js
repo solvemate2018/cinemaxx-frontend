@@ -128,7 +128,7 @@ function generateTables(tablesContainer, projections) {
     const movieCon = projections[key];
     let movie = movieCon[0].movie;
     const ageLimit = movie.category.name+" - "+ movie.category.ageLimit
-    const movieData =[movie.name, movie.genre.name,movie.durationInMinutes +" min.",, ageLimit]
+    const movieData =[movie.name, movie.genre.name, movie.durationInMinutes +" min.", ageLimit]
     const tableMovies = document.createElement("table");
     const tableProjections = document.createElement("table");
     tableMovies.setAttribute("class","movie-table");

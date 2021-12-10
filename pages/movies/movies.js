@@ -37,9 +37,21 @@ function getMovies() {
 }
 
 function generateMovies(tableContainer, movies){
+    const tableMovies = document.createElement("table");
+    const tHeaderDescription =["Movie title","Genre","Duration","Age Limit"];
+    const descriptionRow = tableMovies.insertRow();
+    tHeaderDescription.forEach((text)=>generateCellsInRow(descriptionRow,text));
+    movies.forEach((movie)=>{generateRow(tableMovies, movie)});
     console.log(movies)
-    const tHeaderDescription =["Movie title","Genre","Duration","Age Limit","Movie Details"];
 
+    tableContainer.appendChild(tableMovies);
+}
+
+function generateRow(table,movie){
+    const ageLimit = movie.category.name+" - "+ movie.category.ageLimit;
+    const movieData=[movie.name, movie.genre.name, movie.durationInMinutes +" min.",ageLimit];
+    const row = table.insertRow();
+    movieData.forEach((info)=>generateCellsInRow(row,info));
 }
 
 function generateCellsInRow(row, info) {
