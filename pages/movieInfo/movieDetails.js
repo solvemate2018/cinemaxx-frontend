@@ -1,19 +1,30 @@
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "/pages/shared/footer/footer.js";
 
-const api_movies_details = "http://54.227.55.197/api/movie/details/2"
-const api_movies_details = 'response_1638646668518.json'; // "http://54.227.55.197/api/movie/details"
-//const Movieurl = api_movies_details + MovieId;
-showmovie(api_movies_details);
-let link = "https://www.imdb.com/video/vi1175821337"
+export default (movieID) => {
+   const content = document.querySelector(".content");
 
+   return fetch("./pages/movieInfo/movie.html")
+     .then((response) => response.text())
+     .then((mainHtml) => {
+       content.innerHTML = mainHtml;
+       const api_movies_details = "http://54.227.55.197/api/movie/details";
+       let link = "https://www.imdb.com/video/vi1175821337"
+       const Movieurl = api_movies_details + movieID;
+       getEmbedLink(link);
+       showmovie(Movieurl);
+       renderNavBar();
+       renderFooter();
+     });
+ };
+
+ 
 function getEmbedLink(link) {
    let videoLink = link.substring(26);
    let imdbLink = link.slice(0, 26);
    let embedLink = imdbLink + "/imdb" + videoLink + "/imdb/embed"
    return embedLink;
 }
-
 
 function showmovie(url) {
 fetch(url)
@@ -71,12 +82,10 @@ fetch(url)
      el.appendChild(actorList);}
 
      mainContainer.appendChild(el);
-      renderNavBar();
-      renderFooter();
     })
     .catch((error) => {
         console.log(error);
-    })};
+    });
     
    fetch(url)
       .then(response => response.json())
@@ -159,11 +168,6 @@ fetch(url)
 
          el.appendChild(media)
          //el.appendChild(photos)
-
-
-
-
-
          const ActorsNames = document.createElement("h3");
          ActorsNames.innerHTML = "Actors";
          el.appendChild(ActorsNames)
@@ -185,6 +189,5 @@ fetch(url)
       .catch((error) => {
          console.log(error);
       })
-};
-
+}
 
