@@ -173,11 +173,11 @@ function generateBookTicketButton(row, projectionID){
   //Function for generating cell with button for navigating to book ticket page.
   let bookTicketCell = row.insertCell();
   let bookTicketButton = document.createElement("a");
+
   bookTicketButton.classList.add('btn','btn-primary');
-  bookTicketButton.href="/#/ticket/"+projectionID;
+  bookTicketButton.href="/#/details/ticket/"+projectionID;
   bookTicketButton.setAttribute("role","button");
   bookTicketButton.innerHTML="book ticket";
-  
   bookTicketCell.appendChild(bookTicketButton);
 }
 
@@ -190,6 +190,5 @@ function generateMovieDetailButton(row, movieId){
   movieDetailsButton.href="/#/details/"+movieId;
   movieDetailsButton.setAttribute("role","button");
   movieDetailsButton.innerHTML="movie details";
-  
   movieDetailsCell.appendChild(movieDetailsButton);
 }
