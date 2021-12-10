@@ -26,12 +26,12 @@ export default function () {
       signup: () => {
         renderSignUp();
       },
-      "theater/:theaterID/projections": ({ data }) => {
-        renderProjections(data.theaterID);
-      },
       "/ticket/:projectionId/": ({ data }) => {
         renderTickets(data.projectionId);
       },
+      "theater/:theaterID/projections": ({ data }) => {
+        renderProjections(data.theaterID)
+      }
     })
     .resolve();
 }
