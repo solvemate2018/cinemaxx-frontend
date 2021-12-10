@@ -15,34 +15,30 @@
 </header>
 <body>
     <div class="container">
-    <h1>Movie Repertoire </h1>
-    <br>
-    <div>
-        <form action="">
-
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form1Example13">Choose Date</label>
-                <input type="date" id="dateInput"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit Date</button>
-        </form>
+        <h1>Movie Repertoire </h1>
+        <br>
+        <div>
+            <form action="">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form1Example13">Choose Date</label>
+                    <input type="date" id="dateInput"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Date</button>
+            </form>
+    
+            <form>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form1Example13">Choose Two Dates</label>
+                    <input type="date" id="dateInput1"/>
+                    <input type="date" id="dateInput2"/>
+                </div>
+                <button typ="submit" class="btn btn-primary">Submit Dates</button>
+            </form>
+        </div>
+        <br>
+        <div class="repertoire-table-container" id = "repertoireTableContainer">
+        </div>
     </div>
-    <br>
-    <div>
-        <table class="repertoire-table" id=repertoireTable>
-            <tr>
-                <th>Movie title</th>
-                <th>Genre</th>
-                <th>Age Limit</th>
-                <th>Start Time</th>
-                <th>Duration</th>
-                <th>Hall</th>
-                <th>Ticket Price</th>
-            </tr>
-        </table>
-    </div>
-</div>
     <footer class="border-top footer text-muted">
 
     </footer>

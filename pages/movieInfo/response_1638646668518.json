@@ -1,0 +1,50 @@
+{
+  "title": "Scream",
+  "fullTitle": "Scream (1996)",
+  "releaseDate": "\"1996-12-19\"",
+  "imDbRating": "7.3",
+  "runtimeStr": "1h 51min",
+  "posterUrls": [
+    "https://imdb-api.com/posters/original/DOdP24KStb0rXdbN2OOFawKq9V.jpg",
+    "https://imdb-api.com/posters/original/aXAByjBN8UhaYvotqRCwa5MsMGu.jpg",
+    "https://imdb-api.com/posters/original/3O3klyyYpAZBBE4n7IngzTomRDp.jpg",
+    "https://imdb-api.com/posters/original/njnJx1tirPmZtLH2aAixeg6C1Qh.jpg",
+    "https://imdb-api.com/posters/original/vDViEWAh1MFxOK6qJ6PMyVrxwlv.jpg",
+    "https://imdb-api.com/posters/original/cJcTcwCzw6Od3H5iGJ14iq87UfS.jpg"
+  ],
+  "imageUrls": [
+    "https://imdb-api.com/images/original/MV5BMjIzMDIwOTA1OF5BMl5BanBnXkFtZTcwMjk0NjM5NA@@._V1_Ratio1.0000_AL_.jpg",
+    "https://imdb-api.com/images/original/MV5BMTkwNDU1NzkyNF5BMl5BanBnXkFtZTcwMzk0NjM5NA@@._V1_Ratio1.4800_AL_.jpg",
+    "https://imdb-api.com/images/original/MV5BMTMxNTUwNzAwN15BMl5BanBnXkFtZTcwNDk0NjM5NA@@._V1_Ratio1.0000_AL_.jpg",
+    "https://imdb-api.com/images/original/MV5BMTUwMDQ5MzA4MV5BMl5BanBnXkFtZTcwNTk0NjM5NA@@._V1_Ratio1.0000_AL_.jpg",
+    "https://imdb-api.com/images/original/MV5BMTQwMzc1NzY5OV5BMl5BanBnXkFtZTcwNjk0NjM5NA@@._V1_Ratio1.5000_AL_.jpg",
+    "https://imdb-api.com/images/original/MV5BMTQzNjk0NjY4NF5BMl5BanBnXkFtZTYwNjM4MTM3._V1_Ratio1.1000_AL_.jpg"
+  ],
+  "trailerUrl": "https://www.imdb.com/video/vi1175821337",
+  "actorList": [
+    {
+      "name": "Neve Campbell",
+      "asCharacter": "Sidneyas Sidney"
+    },
+    {
+      "name": "Courteney Cox",
+      "asCharacter": "Gale Weathersas Gale Weathers"
+    },
+    {
+      "name": "David Arquette",
+      "asCharacter": "Deputy Deweyas Deputy Dewey"
+    },
+    {
+      "name": "Skeet Ulrich",
+      "asCharacter": "Billyas Billy"
+    },
+    {
+      "name": "Drew Barrymore",
+      "asCharacter": "Caseyas Casey"
+    },
+    {
+      "name": "Roger Jackson",
+      "asCharacter": "Phone Voiceas Phone Voice"
+    }
+  ]
+}
