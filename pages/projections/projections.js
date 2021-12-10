@@ -17,28 +17,74 @@ export default (theaterID) => {
 };
 
 async function handleProjectionFunctionality() {
-  const repertoireTableElement = document.getElementById("repertoireTable");
+  //Handles the projection functionality, call functions accordingly, sets up the document.
+  const repertoireTableElement = document.getElementById("repertoireTableContainer");
   const dateInputElement = document.getElementById("dateInput")
+  const dateFromInputElement = document.getElementById("dateInput1")
+  const dateToInputElement = document.getElementById("dateInput2")
   const today = new Date().toJSON().slice(0, 10);
-  const form = document.querySelector("form")
-  form.addEventListener("submit",(event)=>handelDateSubmition(event,repertoireTableElement))
+  const form1 = document.querySelector("form")
+  const form2 = document.querySelectorAll("form")[1];
+  form1.addEventListener("submit",(event)=>handelDateSubmition(event,repertoireTableElement,dateInputElement))
+  form2.addEventListener("submit",(event)=>handel2DatesSubmition(event,repertoireTableElement,dateFromInputElement,dateToInputElement))
   dateInputElement.setAttribute("min",today);
   dateInputElement.setAttribute("value",today);
+  dateFromInputElement.setAttribute("min",today);
+  dateFromInputElement.setAttribute("value",today);
+  dateToInputElement.setAttribute("min", today)
+  dateToInputElement.setAttribute("value", today)
   let projections = await getProjectionsByDate(today);
-  projections = rearrangeProjections(projections);
-  generateTable(repertoireTableElement, projections);
+  handleProjections(repertoireTableElement,projections);
 }
 
-async function handelDateSubmition(event,repertoireTableElement){
-  event.preventDefault();
-  let date = document.querySelector("#dateInput").value;
-  deleteAllRowsExceptTheHeader(repertoireTableElement)
-  let projections = await getProjectionsByDate(date)
-  projections = rearrangeProjections(projections);
-  generateTable(repertoireTableElement, projections)
+function handleProjections(table,projections){
+  //function for handling projections after they are fethed. No matter what was recived.
+  table.innerHTML="";
+  try{
+    projections = projections.sort(compareProjectionsByMovieName)
+    projections = groupBy(projections,"movie");  
+    generateTables(table,projections)
+  }catch(err){}
 }
+
+async function handelDateSubmition(event,table,dateInput){
+  //function for fetching submitions given one date
+  event.preventDefault();
+  let date = dateInput.value;
+  let projections = await getProjectionsByDate(date)
+  handleProjections(table,projections)
+}
+
+async function handel2DatesSubmition(event, table,dateFromInput,dateToInput){
+  //function for fetching submitions given two dates.
+  event.preventDefault();
+  let dateFrom = dateFromInput.value;
+  let dateTo = dateToInput.value;
+  let projections = await getProjectionsBetweenDates(dateFrom,dateTo)
+  handleProjections(table,projections)
+}
+
+function getProjectionsByDate(date) {
+  //fetches projections with one date as variable
+  const apiLinkForCurrentDate =
+    API_PROJECTIONS_WITH_THEATER_LINK + "/getByDate?date=" + date;
+  return getProjections(apiLinkForCurrentDate);
+}
+
+function getProjectionsBetweenDates(dateFrom, dateTo) {
+  //fetches projections with two dates as variables
+  const apiLinkWithTwoDates =
+    API_PROJECTIONS_WITH_THEATER_LINK +
+    "/getByTwoDates?dateFrom=" +
+    dateFrom +
+    "&dateTo=" +
+    dateTo;
+  return getProjections(apiLinkWithTwoDates);
+}
+
 
 function getProjections(key) {
+  //function for fetching projections
   const projection = fetch(key, {
     method: "GET",
     headers: {
@@ -52,32 +98,8 @@ function getProjections(key) {
   return projection;
 }
 
-function getProjectionsByDate(date) {
-  const apiLinkForCurrentDate =
-    API_PROJECTIONS_WITH_THEATER_LINK + "/getByDate?date=" + date;
-  return getProjections(apiLinkForCurrentDate);
-}
-
-function getProjectionsBetweenDates(dateFrom, dateTo) {
-  const apiLinkWithTwoDates =
-    API_PROJECTIONS_WITH_THEATER_LINK +
-    "/getByTwoDates?dateFrom=" +
-    dateFrom +
-    "&dateTo=" +
-    dateTo;
-  return getProjections(apiLinkWithTwoDates);
-}
-
-function rearrangeProjections(initialProjections){
-  let projections = initialProjections.sort(compareProjectionsByMovieName);
-
-  //TO:DO make this function rearange projections by movies and time
-  //Right now it is just sorting by movies
-
-  return projections
-}
-
 function compareProjectionsByMovieName(a, b) {
+  //Compares projections by movie name. Used for sorting
   if (a.movie.name < b.movie.name) {
     return -1;
   }
@@ -87,35 +109,59 @@ function compareProjectionsByMovieName(a, b) {
   return 0;
 }
 
-function generateTable(table, projections) {
-  projections.forEach((projection) => {
-    const startTimeArray = projection.startTime;
-    const startTimeDate = startTimeArray.slice(0,-3)
-    const startTimeHour = startTimeArray.slice(-3,-1)
-    const startTime = startTimeDate.join("-")+"  "+startTimeHour.join(":")
-    const ageLimit = projection.movie.category.name+" - "+ projection.movie.category.ageLimit
-    let data = [
-      projection.movie.name,
-      projection.movie.genre.name,
-      ageLimit,
-      startTime,
-      projection.movie.durationInMinutes +" min.",
-      projection.cinemaHallName,
-      projection.ticketPrice +"$",
-    ];
-    let row = table.insertRow();
-    data.forEach((info) => generateCellsInRow(row, info));
-  });
+function groupBy(arr, movie) {
+  //Really cool function for splitiing an array into object containing subarrays based
+  //on a property of the object. In this case, movie name.
+  return arr.reduce(function(memo, x) {
+    if (!memo[x[movie].name]) { memo[x[movie].name] = []; }
+    memo[x[movie].name].push(x);
+    return memo;
+  }, {});
+}
+
+function generateTables(tablesContainer, projections) {
+  //Function for generating all the tables containing all movies and their projections.
+  const tHeaderDescription =["Movie title","Genre","Age Limit","Movie Details"];
+  const tBodyDescription =["Start Time","Duration","Hall","Ticket Price","Book Movie"];
+
+  for (let key in projections) {
+    const movieCon = projections[key];
+    console.log(movieCon)
+    const ageLimit = movieCon[0].movie.category.name+" - "+ movieCon[0].movie.category.ageLimit
+    const movieData =[movieCon[0].movie.name, movieCon[0].movie.genre.name, ageLimit]
+    const tableMovies = document.createElement("table");
+    const tableProjections = document.createElement("table");
+    tableMovies.setAttribute("class","movie-table");
+    tableProjections.setAttribute("class","projection-table");
+
+    const movieDescriptionRow = tableMovies.insertRow();
+    const movieInfoRow = tableMovies.insertRow();
+    const projectionDescriptionRow = tableProjections.insertRow();
+
+    tHeaderDescription.forEach((text)=>generateCellsInRow(movieDescriptionRow,text));
+    movieData.forEach((text)=>generateCellsInRow(movieInfoRow,text))
+    tBodyDescription.forEach((text)=>generateCellsInRow(projectionDescriptionRow,text))
+    movieCon.forEach((projection)=>{
+      const startTimeArray = projection.startTime;
+      const startTimeDate = startTimeArray.slice(0,-3)
+      const startTimeHour = startTimeArray.slice(-3,-1)
+      const startTime = startTimeDate.join("-")+"  "+startTimeHour.join(":")
+      let data = [
+        startTime,
+        projection.movie.durationInMinutes +" min.",
+        projection.cinemaHallName,
+        projection.ticketPrice +"$",
+      ];
+      let row = tableProjections.insertRow();
+      data.forEach((info) => generateCellsInRow(row, info));
+    });
+    tablesContainer.appendChild(tableMovies);
+    tablesContainer.appendChild(tableProjections)
+  }
 }
 
 function generateCellsInRow(row, info) {
   let cell = row.insertCell();
       let text = document.createTextNode(info);
       cell.appendChild(text);
-}
-
-function deleteAllRowsExceptTheHeader(table){
-  while (table.rows.length > 1) {
-    table.deleteRow(1);
-  }
 }
