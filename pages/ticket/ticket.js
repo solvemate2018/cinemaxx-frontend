@@ -1,22 +1,33 @@
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "/pages/shared/footer/footer.js";
-console.log("loaded");
-const projectionId = 2; //needs to be changed so it grabs id from previous page
-const apiUrl = "http://54.227.55.197/api/ticket/projection/" + projectionId;
+let apiUrl = "";
+
+export default (projectionId) => {
+  const content = document.querySelector(".content");
+  apiUrl = `${window.apiUrl}api/ticket/projection/` + projectionId;
+
+  return fetch("./pages/ticket/ticket.html")
+    .then((response) => response.text())
+    .then((mainHtml) => {
+      content.innerHTML = mainHtml;
+
+      const table = document.querySelector("table");
+      const submitBtn = document.querySelector(".submit-btn");
+      const h2ProjectionInfo = document.querySelector("h2");
+
+      renderNavBar();
+      renderFooter();
+
+      renderSeatsAndInfo(table, h2ProjectionInfo);
+      submitBtn.addEventListener("click", () => {
+        const selectedSeats = readTable();
+        sendRequestToBook(projectionId, selectedSeats);
+      });
+    });
+};
+
 let rows = 0;
 let columns = 0;
-const table = document.querySelector("table");
-const submitBtn = document.querySelector(".submit-btn");
-const h2ProjectionInfo = document.querySelector("h2");
-
-renderNavBar();
-renderFooter();
-renderSeatsAndInfo();
-
-submitBtn.addEventListener("click", () => {
-  selectedSeats = readTable();
-  sendRequestToBook(projectionId, selectedSeats);
-});
 
 function getProjectionInfo(responseObject) {
   //returns object with projction info
@@ -29,7 +40,7 @@ function getProjectionInfo(responseObject) {
   };
   return projectionInfo;
 }
-function renderProjectionInfo(responseObject) {
+function renderProjectionInfo(responseObject, h2ProjectionInfo) {
   const projectionInfo = getProjectionInfo(responseObject);
   const movieName = projectionInfo.movie;
   const cinemaHallName = projectionInfo.cinemaHall;
@@ -37,22 +48,24 @@ function renderProjectionInfo(responseObject) {
     "Cinema hall: " + cinemaHallName + "<br> Movie name: " + movieName;
 }
 
-function renderSeatsAndInfo() {
+function renderSeatsAndInfo(table, h2ProjectionInfo) {
   //fetch seat and projection info from api and render data
   fetch(apiUrl)
     .then((response) => response.json())
     .then((tickets) => {
       rows = getNumberOfRows(tickets);
       columns = getNumberOfColumns(tickets);
-      populateTable(tickets);
-      renderProjectionInfo(tickets);
+      populateTable(tickets, table);
+      renderProjectionInfo(tickets, h2ProjectionInfo);
     });
 }
 
 function sendRequestToBook(projectionId, selectedSeats) {
   //sends api request to book a seat
+  //const userJWTToken = JSON.parse(localStorage.getItem("user"));
+  //console.log("jwt token " + userJWTToken);
   const numberOfSeats = selectedSeats.length;
-  for (i = 0; i < numberOfSeats; i++) {
+  for (let i = 0; i < numberOfSeats; i++) {
     const column = selectedSeats[i].column;
     const row = selectedSeats[i].row;
 
@@ -68,6 +81,9 @@ function sendRequestToBook(projectionId, selectedSeats) {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        // attaching the JWT token to the request
+
+        //Authorization: "Bearer " + userJWTToken.accessToken,
       },
     }).then(() => {
       location.reload(); //reloads the page so that seat map is updated
@@ -86,7 +102,7 @@ function readTable() {
   let selectedSeats = [];
   let rowSelected = 0;
   const allCheckboxes = document.querySelectorAll("input");
-  for (i = 0; i < allCheckboxes.length - 1; i++) {
+  for (let i = 0; i < allCheckboxes.length - 1; i++) {
     //iterates through all checkboxes
     if (allCheckboxes[i].checked && !allCheckboxes[i].disabled) {
       if (i == 0) {
@@ -105,12 +121,12 @@ function readTable() {
   return selectedSeats;
 }
 
-function populateTable(responseObject) {
+function populateTable(responseObject, table) {
   //renders cinema hall seats to the table with checkboxes
   let id = 0;
-  for (i = 0; i <= rows; i++) {
+  for (let i = 0; i <= rows; i++) {
     const newRow = table.insertRow(); //inserts new row into table
-    for (j = -1; j < columns; j++) {
+    for (let j = -1; j < columns; j++) {
       const newCell = newRow.insertCell(); //inserts new cell into row
       if (j == -1 && i < rows) {
         //creates numbering of rows on the left
