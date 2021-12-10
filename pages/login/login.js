@@ -1,3 +1,5 @@
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
 export default () => {
   const content = document.querySelector(".content");
 
@@ -7,6 +9,8 @@ export default () => {
       content.innerHTML = loginHtml;
 
       handleLoginFunctionality();
+      renderNavBar();
+      renderFooter();
     });
 };
 
@@ -15,6 +19,8 @@ function handleLoginFunctionality() {
   form.addEventListener("submit", (event) => {
     // Make sure the form is not submitted
     event.preventDefault();
+    console.log(document.querySelector('#form1Example13').value);
+    console.log(document.querySelector('#form1Example23').value);
 
     fetch(`${window.apiUrl}api/auth/signin`, {
       method: "POST",
@@ -32,7 +38,7 @@ function handleLoginFunctionality() {
           // Saving the JWT to local storage
           localStorage.setItem("user", JSON.stringify(data));
           // navigating to the users route. Using the global window.router
-          window.router.navigate(`/user/${data.id}`);
+          window.router.navigate("/");
         }
       });
   });

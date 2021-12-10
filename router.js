@@ -1,8 +1,11 @@
 import renderMain from "./pages/main/main.js";
 import renderAbout from "./pages/about/about.js";
-import renderUser from "./pages/user/user.js";
 import renderLogin from "./pages/login/login.js";
 import renderSignUp from "./pages/signUp/signUp.js";
+import renderProjections from "./pages/projections/projections.js";
+import renderTickets from "./pages/ticket/ticket.js";
+import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "./pages/shared/footer/footer.js";
 
 export default function () {
   window.router = new Navigo("/", { hash: true });
@@ -20,18 +23,15 @@ export default function () {
       login: () => {
         renderLogin();
       },
-      signUp: () => {
+      signup: () => {
         renderSignUp();
       },
-<<<<<<< Updated upstream
-      "/user/:id/": ({ data, params }) => {
-        renderUser(data.id);
+      "/ticket/:projectionId/": ({ data }) => {
+        renderTickets(data.projectionId);
       },
-=======
       "theater/:theaterID/projections": ({ data }) => {
         renderProjections(data.theaterID)
       }
->>>>>>> Stashed changes
     })
     .resolve();
 }

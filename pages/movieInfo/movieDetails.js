@@ -1,8 +1,8 @@
-<<<<<<< Updated upstream
+import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
+import renderFooter from "/pages/shared/footer/footer.js";
+
 const api_movies_details = "http://54.227.55.197/api/movie/details/2"
-=======
 const api_movies_details = 'response_1638646668518.json'; // "http://54.227.55.197/api/movie/details"
->>>>>>> Stashed changes
 //const Movieurl = api_movies_details + MovieId;
 showmovie(api_movies_details);
 let link = "https://www.imdb.com/video/vi1175821337"
@@ -16,7 +16,6 @@ function getEmbedLink(link) {
 
 
 function showmovie(url) {
-<<<<<<< Updated upstream
 fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -72,14 +71,13 @@ fetch(url)
      el.appendChild(actorList);}
 
      mainContainer.appendChild(el);
-
+      renderNavBar();
+      renderFooter();
     })
     .catch((error) => {
         console.log(error);
     })};
     
-    
-=======
    fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -189,6 +187,4 @@ fetch(url)
       })
 };
 
-
->>>>>>> Stashed changes
 
