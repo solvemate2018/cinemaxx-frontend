@@ -30,10 +30,17 @@ export default () => {
 
 async function handleAddMovieFunctionality(){
   //Function for handeling creating the movie 
-  const genres = await fetchAllGenres();
+  const titleInputElement = document.getElementById("title-input");
+  const durationInputElement = document.getElementById("duration-input");
+  const genreInputElement = document.getElementById("select-category");
+  const categoryInputElement = document.getElementById("select-genre");
   const categories = await fetchAllCategories();
-  console.log(genres);
-  console.log(categories);
+  const genres = await fetchAllGenres();
+  generateOptions(genreInputElement, genres);
+  generateOptions(categoryInputElement, categories);
+  const form = document.querySelector("form")
+  form.addEventListener("submit",(event)=>handleMovieCreation(event,titleInputElement,
+    durationInputElement,categoryInputElement,genreInputElement))//Add boxes here later
 
 }
 
@@ -69,7 +76,30 @@ function fetchAllCategories(){
         console.log(error);
       });
     return categories;
+}
 
+function generateOptions(selectionElement, data){
+  //Function for generating options for <select> tags. Works both for genres and categories
+  data.forEach((info)=>{
+    let option = document.createElement("option");
+    option.setAttribute("value", "place holder"); //TODO: CHANGE PLACEHOLDER TO ID.
+    option.innerHTML = info.name;
+      if(info.hasOwnProperty("ageLimit")){
+        option.innerHTML+=" - "+info.ageLimit;
+      }
+    selectionElement.appendChild(option);
+  })
+}
+
+function handleMovieCreation(event, titleElement, durationElement, categoryElement, genreElement){
+  //Function for handling creating movies with given data
+  event.preventDefault();
+  let title = titleElement.value;
+  let duration = durationElement.value;
+  //TODO: CHANGE TO VALUE.
+  let category = categoryElement.options[categoryElement.selectedIndex].text;
+  let genre = genreElement.options[genreElement.selectedIndex].text;
+  console.log(title + " " + duration + " " + category + " " + genre)
 }
 
 function isAdmin(){
