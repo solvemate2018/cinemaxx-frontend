@@ -86,3 +86,5 @@ function generateEditMovieButton(row, movieID){
   editMovieButton.innerHTML="edit movie";
   editMovieCell.appendChild(editMovieButton);
 }
+
+//The add movies button is embedded  in html since it always redirects to the same page.
