@@ -16,7 +16,7 @@ export default () => {
     });
   }else{
     alert("You have to be loged in as admin to access this site.")
-    window.location.href = apiKey;
+    window.location.href = "";
   }
 };
 
@@ -24,6 +24,9 @@ async function handleMovieFunctionality() {
   //Function for handeling all the movie functionality 
   const movieTableContainerElement = document.getElementById("movieTableContainer");
   let movies = await getMovies();
+  try{
+    movies=movies.sort(compareMoviesByName);
+  }catch(error){}
   generateMoviesTable(movieTableContainerElement, movies);
 }
 
@@ -47,6 +50,17 @@ function isAdmin(){
   const userJWTToken = JSON.parse(localStorage.getItem("user"));
   if(userJWTToken==null){return false;}
   return userJWTToken.roles.includes("ROLE_ADMIN");
+}
+
+function compareMoviesByName(a, b) {
+  //Compares movies by their name. Used for sorting
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
 }
 
 function generateMoviesTable(tableContainer, movies){
