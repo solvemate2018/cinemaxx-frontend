@@ -175,7 +175,7 @@ function generateBookTicketButton(row, projectionID){
   let bookTicketButton = document.createElement("a");
 
   bookTicketButton.classList.add('btn','btn-primary');
-  bookTicketButton.href="/#/details/ticket/"+projectionID;
+  bookTicketButton.href="/#/ticket/"+projectionID;
   bookTicketButton.setAttribute("role","button");
   bookTicketButton.innerHTML="book ticket";
   bookTicketCell.appendChild(bookTicketButton);
