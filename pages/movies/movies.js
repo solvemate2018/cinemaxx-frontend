@@ -38,7 +38,7 @@ function getMovies() {
 
 function generateMovies(tableContainer, movies){
     const tableMovies = document.createElement("table");
-    const tHeaderDescription =["Movie title","Genre","Duration","Age Limit"];
+    const tHeaderDescription =["Movie title","Genre","Duration","Age Limit","Edit movie"];
     const descriptionRow = tableMovies.insertRow();
     tHeaderDescription.forEach((text)=>generateCellsInRow(descriptionRow,text));
     movies.forEach((movie)=>{generateRow(tableMovies, movie)});
@@ -52,6 +52,7 @@ function generateRow(table,movie){
     const movieData=[movie.name, movie.genre.name, movie.durationInMinutes +" min.",ageLimit];
     const row = table.insertRow();
     movieData.forEach((info)=>generateCellsInRow(row,info));
+    generateEditMovieButton(row, movie.id)
 }
 
 function generateCellsInRow(row, info) {
@@ -59,4 +60,16 @@ function generateCellsInRow(row, info) {
   let cell = row.insertCell();
       let text = document.createTextNode(info);
       cell.appendChild(text);
+}
+
+function generateEditMovieButton(row, movieID){
+  //Function for generating cell with button for navigating to edit movie page.
+  let editMovieCell = row.insertCell();
+  let editMovieButton = document.createElement("a");
+
+  editMovieButton.classList.add('btn','btn-primary');
+  editMovieButton.href="/#/movie/edit/"+movieID;
+  editMovieButton.setAttribute("role","button");
+  editMovieButton.innerHTML="edit movie";
+  editMovieCell.appendChild(editMovieButton);
 }

@@ -38,7 +38,7 @@ export default function () {
       "details/:movieID": ({ data }) => {
         renderDetails(data.movieID)
       },
-      movies:() =>{
+      movie:() =>{
         renderMovies();
       }
     })
