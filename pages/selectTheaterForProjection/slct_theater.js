@@ -45,7 +45,7 @@ function generateLinks(theaters) {
     li.classList.add("list-group-item");
     let link = document.createElement("a");
     link.innerText = theater.name;
-    link.href = "/#/theater/" + theater.id + "/projections"; //link needs to be chaned
+    link.href = `/#/theater/${theater.id}/movie`; //link needs to be chaned
     listOfLinks.appendChild(li);
     li.appendChild(link);
   });

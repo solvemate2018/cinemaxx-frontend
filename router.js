@@ -33,8 +33,8 @@ export default function () {
       signup: () => {
         renderSignUp();
       },
-      movieListScheduleTime: () => {
-        renderMovieListScheduleTime();
+      "theater/:theaterID/movie": ({data}) => {
+        renderMovieListScheduleTime(data.theaterID);
       },
       "/ticket/:projectionId/": ({ data }) => {
         renderTickets(data.projectionId);
@@ -42,19 +42,20 @@ export default function () {
       "theater/:theaterID/projections": ({ data }) => {
         renderProjections(data.theaterID);
       },
-      "details/:movieID": ({ data }) => {
+      "/details/:movieID": ({ data }) => {
         renderDetails(data.movieID);
       },
-
       "/movie/edit/:movieId/": ({ data }) => {
         renderEditMovie(data.movieId);
       },
       "/projection/create/theater": () => {
         renderSelectTheater();
       },
-
-      movies: () => {
+      movies:() =>{
         renderMovies();
+      },
+      "theater/:theaterID/movie/:movieID": ({data}) => {
+        renderCreateProjection(data.theaterID, data.movieID);
       },
       createProjection: () => {
         renderCreateProjection();
@@ -64,7 +65,7 @@ export default function () {
       },
       "movie/add": () => {
         renderAddMovie();
-      },
+      }
     })
     .resolve();
 }

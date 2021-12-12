@@ -110,7 +110,7 @@ function createProjection(event, date, time, cinemaHallId, movieId){
     }),
   })
     .then((response) => response.json())
-    .then(()=>{window.router.navigate("/movie")})
+    .then(()=>{window.router.navigate("/")})
 
 }
 function convertDateTime(date, time){
