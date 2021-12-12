@@ -25,10 +25,11 @@ username: customer ; password: test (customer)
 
 **Description of who did what**
 
-Mareks Lipnickis: Pages for editing a movie, Booking a ticket and displaying taken seats, Selecting theater when creating new projection
+Mareks Lipnickis: Pages for editing a movie, Booking a ticket and displaying taken seats, Selecting theater when creating new projection. Managing routing.
 
-Bartosz Kochanski: Pages for: viewing all the projections and filtering them by date, viewing all the movies as admin, creating a new movie as admin
+Bartosz Kochanski: Pages for: viewing all the projections and filtering them by date, viewing all the movies as admin, creating a new movie as admin. Managing routing
 
 Razvan Ilisei: Pages for: showing movie details from IMDB API, Admin page for picking movie to schedual projection for.
 
-Georgi Emilov Dimitrov: ...
+Georgi Emilov Dimitrov: The header and the footer so they can be reusable. Pages for: showing all theaters, selecting cinema hall and datetime to create projection. Managing routing. Security/login and sign up pages.
+ 
