@@ -6,6 +6,8 @@ import renderProjections from "./pages/projections/projections.js";
 import renderTickets from "./pages/ticket/ticket.js";
 import renderDetails from "./pages/movieInfo/movieDetails.js";
 import renderMovieListScheduleTime from "./pages/admin/movieListScheduleTime.js";
+import renderMovies from "./pages/movies/movies.js";
+import renderCreateProjection from "./pages/adminProjections/createProjections.js";
 import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "./pages/shared/footer/footer.js";
 
@@ -40,6 +42,15 @@ export default function () {
       },
       "details/:movieID": ({ data }) => {
         renderDetails(data.movieID)
+      },
+      movies:() =>{
+        renderMovies();
+      },
+      createProjection:() =>{
+        renderCreateProjection();
+      },
+      "theater/:theaterID/movie/:movieID": ({data}) => {
+        renderCreateProjection(data.theaterID, data.movieID);
       }
     })
     .resolve();
