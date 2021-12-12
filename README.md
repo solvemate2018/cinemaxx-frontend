@@ -30,3 +30,5 @@ Mareks Lipnickis: Pages for editing a movie, Booking a ticket and displaying tak
 Bartosz Kochanski: Pages for: viewing all the projections and filtering them by date, viewing all the movies as admin, creating a new movie as admin
 
 Razvan Ilisei: Pages for: showing movie details from IMDB API, Admin page for picking movie to schedual projection for.
+
+Georgi Emilov Dimitrov: ...
