@@ -61,7 +61,13 @@ export default function () {
         renderCreateProjection();
       },
       "theater/:theaterID/movie/:movieID": ({ data }) => {
-        renderCreateProjection(data.theaterID, data.movieID);
+        if(localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).roles.includes("ROLE_ADMIN")){
+          renderCreateProjection(data.theaterID, data.movieID);
+        }
+        else{
+          window.alert("You don't have access for here!")
+          renderMain();
+        }
       },
       "movie/add": () => {
         renderAddMovie();

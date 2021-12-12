@@ -67,25 +67,11 @@ function detailsButton(row, movieId) {
 
 function addProjectionBtn(row, movieID, theaterID) {
     const ProjectionCell = row.insertCell();
-    const ProjecitonBtn = document.createElement("a");
-
-    ProjecitonBtn.classList.add('btn', 'btn-primary');
-    //change with path for adding projection
-    //ProjecitonBtn.href = "/#/projection/add";
-    ProjecitonBtn.innerText = "Schedule Time"
-    if (localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).roles.includes('ROLE_ADMIN'))
-        ProjectionCell.appendChild(ProjecitonBtn)
-
-    //If a regular user gets to this page, the button displayed
-    //will redirect him to the projections page
-    else {
-        const ProjecitonBtn1 = document.createElement("a");
-        ProjecitonBtn1.classList.add('btn', 'btn-primary');
-        ProjecitonBtn1.href = `/#/theater/${theaterID}/movie/${movieID}`;
-        ProjecitonBtn1.innerText = "search projections"
-        ProjectionCell.appendChild(ProjecitonBtn1);
-    }
-
+    const ProjecitonBtn1 = document.createElement("a");
+    ProjecitonBtn1.classList.add('btn', 'btn-primary');
+    ProjecitonBtn1.href = `/#/theater/${theaterID}/movie/${movieID}`;
+    ProjecitonBtn1.innerText = "Schedule Time"
+    ProjectionCell.appendChild(ProjecitonBtn1);
 }
 
 

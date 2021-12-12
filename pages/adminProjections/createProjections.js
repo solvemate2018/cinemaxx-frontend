@@ -56,6 +56,7 @@ function generateContentForCinemaHall(theater, cinemaHall, movieId){
 
 function generateDateTimePicker(upperDiv, id, movieId){
   const form = document.createElement("form");
+  form.setAttribute("action", "");
   upperDiv.appendChild(form);
 
   const formOutline = document.createElement("div");
@@ -109,7 +110,12 @@ function createProjection(event, date, time, cinemaHallId, movieId){
       ticketPrice: 16.5,
     }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if(response.status == 201){
+        window.alert("Succesfully created!");
+      }
+      response.json();
+    })
     .then(()=>{window.router.navigate("/")})
 
 }
