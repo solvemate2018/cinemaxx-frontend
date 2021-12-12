@@ -5,7 +5,7 @@ import renderSignUp from "./pages/signUp/signUp.js";
 import renderProjections from "./pages/projections/projections.js";
 import renderTickets from "./pages/ticket/ticket.js";
 import renderDetails from "./pages/movieInfo/movieDetails.js";
-import renderMovies from "./pages/movies/movies.js";
+import renderMovieListScheduleTime from "./pages/admin/movieListScheduleTime.js";
 import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "./pages/shared/footer/footer.js";
 
@@ -29,6 +29,9 @@ export default function () {
       signup: () => {
         renderSignUp();
       },
+      movieListScheduleTime: () => {
+        renderMovieListScheduleTime();
+      },
       "/ticket/:projectionId/": ({ data }) => {
         renderTickets(data.projectionId);
       },
@@ -37,9 +40,6 @@ export default function () {
       },
       "details/:movieID": ({ data }) => {
         renderDetails(data.movieID)
-      },
-      movies:() =>{
-        renderMovies();
       }
     })
     .resolve();
