@@ -7,6 +7,7 @@ import renderTickets from "./pages/ticket/ticket.js";
 import renderDetails from "./pages/movieInfo/movieDetails.js";
 import renderMovies from "./pages/movies/movies.js";
 import renderAddMovie from "./pages/addMovie/addMovie.js";
+import renderMovieListScheduleTime from "./pages/admin/movieListScheduleTime.js";
 import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "./pages/shared/footer/footer.js";
 
@@ -29,6 +30,9 @@ export default function () {
       },
       signup: () => {
         renderSignUp();
+      },
+      movieListScheduleTime: () => {
+        renderMovieListScheduleTime();
       },
       "/ticket/:projectionId/": ({ data }) => {
         renderTickets(data.projectionId);

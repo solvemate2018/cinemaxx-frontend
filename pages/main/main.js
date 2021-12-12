@@ -7,7 +7,12 @@ export default () => {
     .then((response) => response.text())
     .then((mainHtml) => {
       content.innerHTML = mainHtml;
-      generateDynamicContent();
+      if(localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).roles.includes('ROLE_ADMIN')){
+        generateAdminContent();
+      }
+      else{
+        generateDynamicContent();
+      }
       renderNavBar();
       renderFooter();
     });
@@ -44,4 +49,8 @@ link.href = "/#/theater/" + theater.id +"/projections";
 listOfLinks.appendChild(li);
 li.appendChild(link);
 });
+}
+
+function generateAdminContent(){
+  
 }
