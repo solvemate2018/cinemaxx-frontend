@@ -10,7 +10,6 @@ import renderEditMovie from "./pages/movieEdit/movie_edit.js";
 import renderSelectTheater from "./pages/selectTheaterForProjection/slct_theater.js";
 import renderAddMovie from "./pages/addMovie/addMovie.js";
 import renderMovieListScheduleTime from "./pages/admin/movieListScheduleTime.js";
-import renderMovies from "./pages/movies/movies.js";
 import renderCreateProjection from "./pages/adminProjections/createProjections.js";
 import renderNavBar from "./pages/shared/nav-bar/nav-bar.js";
 import renderFooter from "./pages/shared/footer/footer.js";
@@ -47,7 +46,6 @@ export default function () {
         renderDetails(data.movieID);
       },
 
-      
       "/movie/edit/:movieId/": ({ data }) => {
         renderEditMovie(data.movieId);
       },
@@ -55,17 +53,16 @@ export default function () {
         renderSelectTheater();
       },
 
-      movies:() =>{
+      movies: () => {
         renderMovies();
       },
-      createProjection:() =>{
+      createProjection: () => {
         renderCreateProjection();
       },
-      "theater/:theaterID/movie/:movieID": ({data}) => {
+      "theater/:theaterID/movie/:movieID": ({ data }) => {
         renderCreateProjection(data.theaterID, data.movieID);
       },
-      "movie/add":() =>{
-
+      "movie/add": () => {
         renderAddMovie();
       },
     })

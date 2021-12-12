@@ -114,7 +114,7 @@ function updateMovie(updatedMovie) {
     } else {
       alert("An error occured, reload the page and try again");
     }
-    location.reload();
+    window.location.href = "/#/movies";
   });
 }
 
