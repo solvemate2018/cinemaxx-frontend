@@ -29,7 +29,7 @@ Mareks Lipnickis: Pages for editing a movie, Booking a ticket and displaying tak
 
 Bartosz Kochanski: Pages for: viewing all the projections and filtering them by date, viewing all the movies as admin, creating a new movie as admin. Managing routing
 
-Razvan Ilisei: Pages for: showing movie details from IMDB API, Admin page for picking movie to schedual projection for.
+Razvan Ilisei: Pages for: showing movie details from IMDB API, Admin page for picking movie to schedual projection for. Managing routing.
 
 Georgi Emilov Dimitrov: The header and the footer so they can be reusable. Pages for: showing all theaters, selecting cinema hall and datetime to create projection. Managing routing. Security/login and sign up pages.
  
