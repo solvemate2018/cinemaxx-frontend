@@ -70,7 +70,7 @@ function sendRequestToBook(projectionId, selectedSeats) {
       const row = selectedSeats[i].row;
 
       const apiUrlPut =
-        "http://54.227.55.197/api/ticket/book/" +
+        `${window.apiUrl}api/ticket/book/` +
         projectionId +
         "/row/" +
         row +

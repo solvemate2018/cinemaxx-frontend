@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Edit a movie</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./pages/movieEdit/movie_edit.css" />
+  </head>
+  <header></header>
+  <body>
+    <div class="main-div">
+      <h2 class="heading">Edit a movie</h2>
+
+      <div class="child-div">
+        <label for="movie-name">Movie name: </label>
+        <input class="movie-name" type="text" name="movie-name" /> <br />
+        <label for="duration">Duration in minutes: </label>
+        <input class="duration" type="number" name="duration" /> <br />
+        <label for="genre">Select a genre: </label>
+        <select class="genre" name="genre">
+          <option value="Horror">Horror</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Drama">Drama</option>
+          <option value="Fantasy">Fantasy</option>
+        </select>
+        <br />
+        <label for="category">Select an age category: </label>
+        <select class="category" name="category">
+          <option value="A">A (8+)</option>
+          <option value="B">B (12+)</option>
+          <option value="C">C (16+)</option>
+          <option value="D">D (18+)</option>
+        </select>
+        <br />
+        <input class="submit" type="submit" value="Update the movie" />
+      </div>
+    </div>
+    <script type="text/javascript" src="movie_edit.js"></script>
+  </body>
+  <footer class="border-top footer text-muted"></footer>
+</html>
