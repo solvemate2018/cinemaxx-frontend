@@ -16,7 +16,7 @@ export default () => {
     });
   }else{
     alert("You have to be loged in as admin to access this site.")
-    window.router.navigate("/");
+    window.router.navigate("/login");
   }
 };
 
