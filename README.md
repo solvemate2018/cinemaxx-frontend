@@ -3,7 +3,7 @@
 
 Sprint 1 Video link: https://we.tl/t-1S5ZL6jPnZ
 
-Sprint 2 Video link: 
+Sprint 2 Video link: https://web.microsoftstream.com/video/15f6a743-49a4-41aa-8e8a-e908349cfcd6
 
 
 
