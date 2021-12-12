@@ -42,7 +42,7 @@ export default function () {
       "theater/:theaterID/projections": ({ data }) => {
         renderProjections(data.theaterID);
       },
-      "details/:movieID": ({ data }) => {
+      "/details/:movieID": ({ data }) => {
         renderDetails(data.movieID);
       },
       "/movie/edit/:movieId/": ({ data }) => {
@@ -57,9 +57,15 @@ export default function () {
       "theater/:theaterID/movie/:movieID": ({data}) => {
         renderCreateProjection(data.theaterID, data.movieID);
       },
-      "movie/add":() =>{
-        renderAddMovie();
+      createProjection: () => {
+        renderCreateProjection();
       },
+      "theater/:theaterID/movie/:movieID": ({ data }) => {
+        renderCreateProjection(data.theaterID, data.movieID);
+      },
+      "movie/add": () => {
+        renderAddMovie();
+      }
     })
     .resolve();
 }
