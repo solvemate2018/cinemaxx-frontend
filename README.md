@@ -15,6 +15,7 @@ Backend github repo: https://github.com/solvemate2018/CInema-XX
 
 
 **Credentials to test:**
+
 username: admin ;  password: test (admin)
 
 username: customer ; password: test (customer)
