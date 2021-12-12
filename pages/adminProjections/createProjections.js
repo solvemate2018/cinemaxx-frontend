@@ -35,11 +35,11 @@ function fetchCinemaHalls(theaterID){
 
 function generateContent(theater, movieID){
     theater.cinemaHallDTOList.forEach(cinemaHall => {
-        generateContentForCinemaHall(theater, cinemaHall);
+        generateContentForCinemaHall(theater, cinemaHall, movieID);
     });
 }
 
-function generateContentForCinemaHall(theater, cinemaHall){
+function generateContentForCinemaHall(theater, cinemaHall, movieId){
   const createProjectionForm = document.createElement("div");
 
   const header = document.createElement("h1");
@@ -49,12 +49,12 @@ function generateContentForCinemaHall(theater, cinemaHall){
 
   const formForPickingDateAndTime = document.createElement("div");
 
-  generateDateTimePicker(formForPickingDateAndTime, cinemaHall.id);
+  generateDateTimePicker(formForPickingDateAndTime, cinemaHall.id, movieId);
   createProjectionForm.appendChild(formForPickingDateAndTime);
   document.querySelector("#main").appendChild(createProjectionForm);
 }
 
-function generateDateTimePicker(upperDiv, id){
+function generateDateTimePicker(upperDiv, id, movieId){
   const form = document.createElement("form");
   upperDiv.appendChild(form);
 
@@ -70,7 +70,7 @@ function generateDateTimePicker(upperDiv, id){
 
   const inputDate = document.createElement("input");
   inputDate.setAttribute("type", "date");
-  inputDate.id = id;
+  inputDate.id = "Date:" + id;
   formOutline.appendChild(inputDate);
 
 
@@ -82,12 +82,37 @@ function generateDateTimePicker(upperDiv, id){
 
   const inputTime = document.createElement("input");
   inputTime.setAttribute("type", "time");
-  inputTime.id = id;
+  inputTime.id = "Time:" + id;
   formOutline.appendChild(inputTime);
 
   const submitButton = document.createElement("button");
   submitButton.setAttribute("type", "submit");
   submitButton.classList.add("btn", "btn-primary");
+  submitButton.id = "Submit:" + id;
   submitButton.innerText = "Create Projection";
   form.appendChild(submitButton);
+
+  form.addEventListener("submit",(event) => createProjection(event, inputDate, inputTime, id, movieId))
+}
+
+function createProjection(event, date, time, cinemaHallId, movieId){
+  let javaDateTime = convertDateTime(date.value, time.value);
+
+  fetch(`${window.apiUrl}api/projection/movie/${movieId}/hall/${cinemaHallId}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+    },
+    body: JSON.stringify({
+      startTime: javaDateTime,
+      ticketPrice: 16.5,
+    }),
+  })
+    .then((response) => response.json())
+    .then(()=>{window.router.navigate("/movie")})
+
+}
+function convertDateTime(date, time){
+  return date + "T" + time;
 }
