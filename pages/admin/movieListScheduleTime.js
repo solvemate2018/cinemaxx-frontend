@@ -1,6 +1,6 @@
 import renderFooter from "/pages/shared/footer/footer.js";
 import renderNavBar from "/pages/shared/nav-bar/nav-bar.js";
-export default () => {
+export default (theaterID) => {
 
 
     const content = document.querySelector(".content");
@@ -10,7 +10,7 @@ export default () => {
         .then((mainHtml) => {
             content.innerHTML = mainHtml;
             const api_movies = "http://54.227.55.197/api/movie"
-            getMovies(api_movies);
+            getMovies(api_movies, theaterID);
             renderNavBar();
             renderFooter();
         })
@@ -18,15 +18,14 @@ export default () => {
 
 
 const api_movies = "http://54.227.55.197/api/movie"
-getMovies(api_movies);
 
-function getMovies(url) {
+function getMovies(url, theaterID) {
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
 
-            createTable(data);
+            createTable(data, theaterID);
 
         })
         .catch((error) => {
@@ -34,9 +33,9 @@ function getMovies(url) {
         })
 };
 
-function createTable(array) {
+function createTable(array, theaterID) {
     var mainContainer = document.getElementById("movieList")
-    const tHeader = ["Movie title", "Duration", "Genre", "Age Limit", "Details", "Projections"];
+    const tHeader = ["Movie title", "Duration", "Genre", "Age Limit", "Projections"];
     var table = document.createElement("table");
 
 
@@ -49,8 +48,7 @@ function createTable(array) {
         createCell(movieRow, array[j].durationInMinutes);
         createCell(movieRow, array[j].genre.name);
         createCell(movieRow, array[j].category.name + "-" + array[j].category.ageLimit);
-        detailsButton(movieRow, j);
-        addProjectionBtn(movieRow);
+        addProjectionBtn(movieRow, array[j].id, theaterID);
     }
 
 
@@ -67,7 +65,7 @@ function detailsButton(row, movieId) {
 
 }
 
-function addProjectionBtn(row) {
+function addProjectionBtn(row, movieID, theaterID) {
     const ProjectionCell = row.insertCell();
     const ProjecitonBtn = document.createElement("a");
 
@@ -83,7 +81,7 @@ function addProjectionBtn(row) {
     else {
         const ProjecitonBtn1 = document.createElement("a");
         ProjecitonBtn1.classList.add('btn', 'btn-primary');
-        ProjecitonBtn1.href = "../projections/projections.html"
+        ProjecitonBtn1.href = `/#/theater/${theaterID}/movie/${movieID}`;
         ProjecitonBtn1.innerText = "search projections"
         ProjectionCell.appendChild(ProjecitonBtn1);
     }
